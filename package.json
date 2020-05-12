@@ -2,8 +2,9 @@
   "name": "hello-npm-express",
   "version": "1.0.0",
   "description": "hello world for npm and express",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
+    "start": "nodemon --exec ts-node src/index.ts",
     "test": "echo \"testing not configured\" && exit 1"
   },
   "author": "Joseph Plasch",
