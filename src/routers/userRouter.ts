@@ -1,5 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
-import { Router } from "express";
+import express, { Router, Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 import { findUsers, findUsersById } from "../repository/user-data-access";
 
