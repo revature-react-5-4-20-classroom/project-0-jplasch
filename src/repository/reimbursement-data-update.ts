@@ -4,6 +4,10 @@ import { connectionPool } from ".";
 
 
 
+
+// This handles both updating and submitting reimbursements.
+// If a reimbursementId already exists, it will update it;
+// if it does not exist, it will insert a new row.
 export async function updateReimbursement(reimbursementId: number, author: number, amount: number,
     dateSubmitted: number, dateResolved: number, description: string, resolver: number,
     status: number, type: number): Promise<Reimbursement[]> {
