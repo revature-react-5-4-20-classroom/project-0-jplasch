@@ -16,7 +16,7 @@ export async function findUsers(): Promise<User[]> {
             console.log(row.username);
         }
         return result.rows.map((u)=>{
-            return new User(u.userId, u.username, u.password, u.firstName, u.lasetName, u.email, u.role);
+            return new User(u.userId, u.username, u.password, u.firstName, u.lastName, u.email, u.role);
         });
     } catch (e) {
         throw new Error(`Failed to query all users: ${e.message}`);
@@ -38,7 +38,7 @@ export async function findUsersById(id: number): Promise<User[]> {
             console.log(row.username);
         }
         return result.rows.map((u)=>{
-            return new User(u.userId, u.username, u.password, u.firstName, u.lasetName, u.email, u.role);
+            return new User(u.userId, u.username, u.password, u.firstName, u.lastName, u.email, u.role);
         });
     } catch (e) {
         throw new Error(`Failed to query all users: ${e.message}`);
