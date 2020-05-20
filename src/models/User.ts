@@ -1,3 +1,4 @@
+import { Role } from "./Role";
 // User model keeps track of user information
 
 export class User {
@@ -7,9 +8,9 @@ export class User {
     firstName: string; // not null
     lastName: string; // not null
     email: string; // not null
-    role: number; // not null
+    role: Role; // not null
 
-    constructor(userId: number, username: string, password: string, firstName: string, lastName: string, email: string, role: number){
+    constructor(userId: number, username: string, password: string, firstName: string, lastName: string, email: string, role: Role){
         this.userId = userId;
         this.username = username;
         this.password = password;
