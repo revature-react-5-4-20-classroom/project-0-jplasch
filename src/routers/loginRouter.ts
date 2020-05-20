@@ -22,6 +22,7 @@ loginRouter.post('/', async (req: Request, res: Response) => {
         }
         //send the user back, as a favor to our future selves
         res.json(user);
+        console.log(user);
       } catch (e) {
         console.log(e.message);
         res.status(401).send('Failed to authenticate username and password');

@@ -16,10 +16,7 @@ export async function findReimbursementByStatus(id: number): Promise<Reimburseme
         for(let row of result.rows) {
             console.log(row.author);
         }
-        return result.rows.map((u)=>{
-            return new Reimbursement(u.reimbursementId, u.author, u.amount, u.dateSubmitted,
-            u.dateResolved, u.description, u.resolver, u.status, u.type);
-        });
+        return result.rows;
     } catch (e) {
         throw new Error(`Failed to query reimbursement by status: ${e.message}`);
     } finally {
@@ -38,10 +35,8 @@ export async function findReimbursementByUser(id: number): Promise<Reimbursement
         for(let row of result.rows) {
             console.log(row.username);
         }
-        return result.rows.map((u)=>{
-            return new Reimbursement(u.reimbursementId, u.author, u.amount, u.dateSubmitted,
-                u.dateResolved, u.description, u.resolver, u.status, u.type);
-        });
+        console.log(result.rows);
+        return result.rows;
     } catch (e) {
         throw new Error(`Failed to query reimbursement by user: ${e.message}`);
     } finally {

@@ -11,11 +11,8 @@ export async function findUsers(): Promise<User[]> {
             `SELECT *
             FROM users;`
         );
-        for(let row of result.rows) {
-            console.log(row.firstName);
-        };
         return result.rows.map((u)=>{
-            return new User(u.userId, u.username, u.password, u.firstName, u.lastName, u.email, u.role);
+            return new User(u.userid, u.username, u.password, u.firstname, u.lastname, u.email, u.role);
         });
     } catch (e) {
         throw new Error(`Failed to query all users: ${e.message}`);
@@ -60,7 +57,7 @@ export async function findUserByUsernamePassword(username: string, password: str
         WHERE users.username = $1 AND users.password = $2;`, [username, password]
       );
       const usersMatchingUsernamePassword = result.rows.map((u) => {
-        return new User(u.userId, u.username, u.password, u.firstName, u.lastName, u.email, u.role);
+        return new User(u.userid, u.username, u.password, u.firstname, u.lastname, u.email, u.role);
       })
       if(usersMatchingUsernamePassword.length > 0) {
         return usersMatchingUsernamePassword[0];

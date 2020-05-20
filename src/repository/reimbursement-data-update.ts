@@ -19,10 +19,8 @@ export async function updateReimbursement(reimbursementId: number, author: numbe
             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);`, [reimbursementId, author, amount, dateSubmitted,
                 dateResolved, description, resolver, status, type]
         );
-        return result.rows.map((u)=>{
-            return new Reimbursement(u.reimbursementId, u.author, u.amount, u.dateSubmitted,
-                u.dateResolved, u.description, u.resolver, u.status, u.type);
-        });
+        console.log(result.rows);
+        return result.rows;
     } catch (e) {
         let result : QueryResult = await client.query(
             `UPDATE reimbursements
@@ -38,10 +36,8 @@ export async function updateReimbursement(reimbursementId: number, author: numbe
             WHERE reimbursementId = $1;`, [reimbursementId, author, amount, dateSubmitted,
                 dateResolved, description, resolver, status, type]
         );
-        return result.rows.map((u)=>{
-            return new Reimbursement(u.reimbursementId, u.author, u.amount, u.dateSubmitted,
-                u.dateResolved, u.description, u.resolver, u.status, u.type);
-        });
+        console.log(result.rows);
+        return result.rows;
     } finally {
         client && client.release();
     }

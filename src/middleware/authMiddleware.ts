@@ -31,21 +31,22 @@ export const authUserMiddleware = (req: Request, res: Response, next: NextFuncti
 }
 
 
-export function authRoleFactory(role: string[]) {
+export function authRoleFactory(roles: string[]) {
     return (req: Request, res: Response, next: NextFunction) => {
         if(!req.session || !req.session.user) {
           res.status(401).send('Please login');
         } else {
           let allowed = false;
-          for(let roles of role) {
-            if(req.session.user.roles === roles) {
+          for(let role of roles) {
+            console.log(req.session.user);
+            if(req.session.user.role === role) {
               allowed = true;
             }
           }
           if(allowed) {
             next();
           } else {
-            res.status(403).send(`Not authorized with role: ${req.session.user.roles}`);
+            res.status(403).send(`Not authorized with role: ${req.session.user.role}`);
           }
         }
       }

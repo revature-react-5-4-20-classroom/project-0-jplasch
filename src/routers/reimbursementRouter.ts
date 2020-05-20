@@ -1,18 +1,22 @@
 import express, { Router, Request, Response, NextFunction } from "express";
 import { findReimbursementByStatus, findReimbursementByUser } from "../repository/reimbursement-data-access";
 import { updateReimbursement } from "../repository/reimbursement-data-update";
+import { authRoleFactory } from "../middleware/authMiddleware";
+import { Reimbursement } from "../models/Reimbursement";
 
 export const reimbursementRouter : Router = express.Router();
 
 // allowed roles: finance-manager - apply auth middleware to allow access
-//userRouter.use(authRoleFactory(['finance-manager']));
+reimbursementRouter.use(authRoleFactory(['finance-manager']));
 
 reimbursementRouter.get('/status/:id', async (req: Request, res: Response) => {
     const id = +req.params.id;
     if(isNaN(id)) {
         res.status(400).send('Must be numeric path');
     } else {
-        res.json(findReimbursementByStatus(id));
+        const reimbursementStatusId: Reimbursement[] = await findReimbursementByStatus(id);
+        res.json(reimbursementStatusId);
+        console.log(reimbursementStatusId);
     }
 });
 
@@ -21,7 +25,9 @@ reimbursementRouter.get('/author/userId/:id', async (req: Request, res: Response
     if(isNaN(id)) {
         res.status(400).send('Must be numeric path');
     } else {
-        res.json(findReimbursementByUser(id));
+        const reimbursementUserId: Reimbursement[] = await findReimbursementByUser(id);
+        res.json(reimbursementUserId);
+        console.log(reimbursementUserId);
     }
 });
 
