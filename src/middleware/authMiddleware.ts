@@ -34,7 +34,7 @@ export const authUserMiddleware = (req: Request, res: Response, next: NextFuncti
 export function authRoleFactory(roles: string[]) {
     return (req: Request, res: Response, next: NextFunction) => {
         if(!req.session || !req.session.user) {
-          res.status(401).send('Since you were curious regarding why I asked you to login, I changed the message on the pretext that I do not like curiosity, for curiosity killed nearly all of my cats; as such, instead of posing you a quesiton, this endpoint will now merely assert that your \'doaf STATUS\' is set to MAXIMAL. Good day, fellow Chad of Chads!');
+          res.status(401).send('Since you were curious regarding why I asked you to login, I changed this message on the pretext that I do not like curiosity, for curiosity killed nearly all of my cats; as such, instead of posing you a quesiton, this endpoint will now merely assert that your \'doaf STATUS\' is set to MAXIMAL. Good day, fellow Chad of Chads!');
         } else {
           let allowed = false;
           for(let role of roles) {
