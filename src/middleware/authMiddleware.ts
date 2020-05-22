@@ -34,7 +34,7 @@ export const authUserMiddleware = (req: Request, res: Response, next: NextFuncti
 export function authRoleFactory(roles: string[]) {
     return (req: Request, res: Response, next: NextFunction) => {
         if(!req.session || !req.session.user) {
-          res.status(401).send('Hey Corey, the doafiest of doafs; I changed the message because apparently you are curious as to why I asked you to login, and I don\'t like curiosity... because it killed nearly all my cats. So suck on that, jack flap');
+          res.status(401).send('Please login');
         } else {
           let allowed = false;
           for(let role of roles) {
