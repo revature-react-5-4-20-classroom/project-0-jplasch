@@ -10,7 +10,7 @@ const app : Application = express()
 
 // Check if webhook works by pushing the new endpoint:
 app.get('/new-endpoint', (req: Request, res: Response) => {
-    res.send('Since you were curious regarding why I asked you to login, I changed the message since I do not like curiosity; curiosity killed nearly all of my cats. As such, instead of posing you a quesiton, this message will now merely assert that you \'doaf STATUS\' is set to MAXIMAL. Good day, fellow Chad.');
+    res.send('webhooks... works!');
 });
 
 app.use(bodyParser.json());
