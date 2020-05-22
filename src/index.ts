@@ -10,7 +10,7 @@ const app : Application = express()
 
 // Check if webhook works by pushing the new endpoint:
 app.get('/new-endpoint', (req: Request, res: Response) => {
-    res.send('This new Webhooks... WORKED!');
+    res.send('New Test');
 });
 
 app.use(bodyParser.json());
