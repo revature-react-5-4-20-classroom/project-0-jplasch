@@ -9,7 +9,7 @@ import { loginRouter } from "./routers/loginRouter";
 const app : Application = express()
 
 // Check if webhook works by pushing the new endpoint:
-app.get('/new-endpoint', (req: Request, res: Response) => {
+app.get('/new-endpoint', req: Request, res: Response => {
     res.send('Webhooks worked!');
 });
 
