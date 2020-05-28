@@ -1,7 +1,6 @@
 import express, { Router, Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
-import { findUsers, findUsersById } from "../repository/user-data-access";
-import { updateUser } from "../repository/user-data-update";
+import { findUsers, findUsersById, updateUser } from "../repository/user-data-access";
 import { authRoleFactory } from "../middleware/authMiddleware";
 
 
@@ -31,7 +30,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
 
 userRouter.patch('/', async (req: Request, res: Response) => {
     let {userId, username, password, firstName, lastName, email, role} = req.body;
-    if(true) {
+    if(userId&&username&&password&&firstName&&lastName&&email&&role) {
         updateUser(userId, username, password, firstName, lastName, email, role);
         res.sendStatus(201);
     } else {
