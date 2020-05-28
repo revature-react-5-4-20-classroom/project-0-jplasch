@@ -7,8 +7,7 @@ import { Reimbursement } from "../models/Reimbursement";
 export const reimbursementRouter : Router = express.Router();
 
 // allowed roles: finance-manager - apply auth middleware to allow access
-reimbursementRouter.use(authRoleFactory(['finance-manager']));
-reimbursementRouter.use(authRoleFactory(['Admin']));
+reimbursementRouter.use(authRoleFactory(['finance-manager', 'admin']));
 
 reimbursementRouter.get('/status/:id', async (req: Request, res: Response) => {
     const id = +req.params.id;
@@ -32,7 +31,7 @@ reimbursementRouter.get('/author/userId/:id', async (req: Request, res: Response
     }
 });
 
-reimbursementRouter.post('/', async (req: Request, res: Response) => {
+reimbursementRouter.patch('/', async (req: Request, res: Response) => {
     let {reimbursementId, author, amount, dateSubmitted,
         dateResolved, description, resolver, status, type} = req.body;
     if(reimbursementId&&author&&amount&&dateSubmitted&&dateResolved&&description&&resolver

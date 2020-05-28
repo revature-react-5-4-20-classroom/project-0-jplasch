@@ -10,7 +10,9 @@ export async function findReimbursementByStatus(id: number): Promise<Reimburseme
     client = await connectionPool.connect();
     try {
         let result : QueryResult = await client.query(
-            `SELECT * FROM reimbursements INNER JOIN reimbursement_status ON reimbursementId = statusId
+            `SELECT * FROM reimbursements
+            INNER JOIN reimbursement_status
+            ON statusId = reimbursements.status
             WHERE statusId = $1;`, [id]
         );
         for(let row of result.rows) {
@@ -29,7 +31,9 @@ export async function findReimbursementByUser(id: number): Promise<Reimbursement
     client = await connectionPool.connect();
     try {
         let result : QueryResult = await client.query(
-            `SELECT * FROM reimbursements INNER JOIN users ON reimbursementId = userId
+            `SELECT * FROM reimbursements
+            INNER JOIN users
+            ON reimbursementId = userId
             WHERE userId = $1;`, [id]
         );
         for(let row of result.rows) {

@@ -29,9 +29,9 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
-userRouter.post('/', async (req: Request, res: Response) => {
+userRouter.patch('/', async (req: Request, res: Response) => {
     let {userId, username, password, firstName, lastName, email, role} = req.body;
-    if(userId&&username&&password&&firstName&&lastName&&email&&role) {
+    if(true) {
         updateUser(userId, username, password, firstName, lastName, email, role);
         res.sendStatus(201);
     } else {
