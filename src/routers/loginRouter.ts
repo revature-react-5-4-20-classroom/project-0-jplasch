@@ -13,7 +13,7 @@ loginRouter.get('/', async(req: Request, res:Response) => {
   res.send('This is the login page. Please login.');
 });
 
-loginRouter.patch('/', async (req: Request, res: Response) => {
+loginRouter.post('/', async (req: Request, res: Response) => {
     const {username, password} = req.body;
     if( !username || !password) {
       res.status(400).send('Please include username and password fields for login');
