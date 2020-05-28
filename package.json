@@ -13,7 +13,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "passport-auth-token": "^1.0.1",
+    "passport-unique-token": "^1.0.0",
     "pg": "^8.2.1"
   },
   "devDependencies": {
