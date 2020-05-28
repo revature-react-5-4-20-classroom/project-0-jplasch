@@ -16,7 +16,7 @@ export async function findReimbursementByStatus(id: number): Promise<Reimburseme
             WHERE statusId = $1;`, [id]
         );
         for(let row of result.rows) {
-            console.log(row.author);
+            //console.log(row.author);
         }
         return result.rows;
     } catch (e) {

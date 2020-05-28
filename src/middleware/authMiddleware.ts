@@ -1,4 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
+import { userRouter } from '../routers/userRouter';
+import { findUsers } from '../repository/user-data-access';
 
 export function authRoleFactory(roles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -7,8 +9,7 @@ export function authRoleFactory(roles: string[]) {
       } else {
         let allowed = false;
         for(let role of roles) {
-          // console.log(req.session.user);
-          if(req.session.user.role === role) {
+          if(req.session.user.role === role || '/' + req.session?.user.userId === req.path) {
             allowed = true;
           }
         }
@@ -21,34 +22,13 @@ export function authRoleFactory(roles: string[]) {
     }
 }
 
-
-
-// export const authAdminMiddleware = (req: Request, res: Response, next: NextFunction) => {
-//     if(!req.session || !req.session.user) {
-//         res.status(401).send('Please login!');
-//     } else if (req.session.user.role !== 'admin') {
-//         res.status(403).send('Not Authorized');
-//     } else {
-//         next();
-//     }
-// }
-
-// export const authFinanceManagerMiddleware = (req: Request, res: Response, next: NextFunction) => {
-//     if(!req.session || !req.session.user) {
-//         res.status(401).send('Please login!');
-//     } else if (req.session.user.role !== 'finance-manager') {
-//         res.status(403).send('Not Authorized');
-//     } else {
-//         next();
-//     }
-// }
-
-// export const authUserMiddleware = (req: Request, res: Response, next: NextFunction) => {
-//     if(!req.session || !req.session.user) {
-//         res.status(401).send('Please login!');
-//     } else if (req.session.user.role !== 'user') {
-//         res.status(403).send('Not Authorized');
-//     } else {
-//         next();
-//     }
-// }
+// export function unless(middleware: Function) {
+//   return function(req: Request, res: Response, next: NextFunction) {
+//       if ( '/' + req.session?.user.userId === req.path) {
+//           return next();
+//       } 
+//       else {
+//           return middleware(req, res, next);
+//       }
+//   };
+// };

@@ -1,13 +1,14 @@
 import express, { Router, Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
-import { findUsers, findUsersById, updateUser } from "../repository/user-data-access";
+import { findUsers, findUsersById, updateUser, findUserByUsernamePassword } from "../repository/user-data-access";
 import { authRoleFactory } from "../middleware/authMiddleware";
+import { loggingMiddleware } from "../middleware/loggingMiddleware";
 
 
 export const userRouter : Router = express.Router();
 
 // allowed roles: finance-manager - apply auth middleware to allow access
-userRouter.use(authRoleFactory(['finance-manager', 'admin']));
+userRouter.use(authRoleFactory(['finance-manager']));
 
 userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -16,10 +17,13 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     } catch (e) {
         next(e);
     }
-})
+});
 
 userRouter.get('/:id', async (req: Request, res: Response) => {
     const id = +req.params.id;
+    if(req.session?.user.userId === id) {
+        console.log(await findUsersById(id));
+    }
     if(isNaN(id)) {
         res.status(400).send('Must be numeric path');
     } else {
