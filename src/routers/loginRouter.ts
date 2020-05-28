@@ -9,6 +9,9 @@ export const loginRouter: Router = express.Router();
 // });
 
 
+loginRouter.get('/', async(req: Request, res:Response) => {
+  res.send('This is the login page. Please login.');
+});
 
 loginRouter.post('/', async (req: Request, res: Response) => {
     const {username, password} = req.body;

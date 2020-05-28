@@ -8,6 +8,7 @@ export const reimbursementRouter : Router = express.Router();
 
 // allowed roles: finance-manager - apply auth middleware to allow access
 reimbursementRouter.use(authRoleFactory(['finance-manager']));
+reimbursementRouter.use(authRoleFactory(['Admin']));
 
 reimbursementRouter.get('/status/:id', async (req: Request, res: Response) => {
     const id = +req.params.id;
