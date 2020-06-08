@@ -5,6 +5,7 @@ import { sessionMiddleware } from "./middleware/sessionMiddleware";
 import { userRouter } from "./routers/userRouter";
 import { reimbursementRouter } from "./routers/reimbursementRouter";
 import { loginRouter } from "./routers/loginRouter";
+import { corsFilter } from "./middleware/corsFilter";
 
 const app : Application = express()
 
@@ -16,6 +17,7 @@ app.get('/new-endpoint', (req: Request, res: Response) => {
 app.use(bodyParser.json());
 app.use(loggingMiddleware);
 app.use(sessionMiddleware);
+app.use(corsFilter);
 app.use('/users', userRouter);
 app.use('/reimbursements', reimbursementRouter);
 app.use('/login', loginRouter);
