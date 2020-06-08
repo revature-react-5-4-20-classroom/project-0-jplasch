@@ -1,7 +1,7 @@
 import { User } from "../models/User";
 import { PoolClient, QueryResult } from "pg";
 import { connectionPool } from ".";
-// import { Role } from "../models/Role";
+import { Role } from "../models/Role";
 
 
 export async function findUsers(): Promise<User[]> {
@@ -74,7 +74,7 @@ export async function findUserByUsernamePassword(username: string, password: str
   }
 
 export async function updateUser(userId:number, username:string, password:string,
-    firstName:string, lastName:string, email:string, role:string): Promise<User[]> {
+    firstName:string, lastName:string, email:string, role:Role): Promise<User[]> {
     let client : PoolClient;
     client = await connectionPool.connect();
     try {
