@@ -14,6 +14,9 @@ loginRouter.get('/', async(req: Request, res:Response) => {
 });
 
 loginRouter.post('/', async (req: Request, res: Response) => {
+    console.log('first place to look');
+    console.log(req.session);
+    console.log(req.body);
     const {username, password} = req.body;
     if( !username || !password) {
       res.status(400).send('Please include username and password fields for login');
