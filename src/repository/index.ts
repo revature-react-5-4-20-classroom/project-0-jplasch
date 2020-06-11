@@ -8,7 +8,7 @@ import { Pool } from "pg";
 // For MY credentials:
 // export PG_HOST=database-1.cbjl3d8fbz4e.us-west-1.rds.amazonaws.com
 // export PG_USER=postgres
-// export PG_PASSWORD=360-auG1991
+// export PG_PASSWORD=(standard password)
 // export PG_DATABASE=postgres
 export const connectionPool : Pool = new Pool({
     host: process.env['PG_HOST'],
