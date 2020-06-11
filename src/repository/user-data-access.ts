@@ -47,20 +47,26 @@ export async function findUsersById(id: number): Promise<User[]> {
 // });
 
 export async function findUserByUsernamePassword(username: string, password: string) : Promise<User> {
-    let client : PoolClient;
-    client = await connectionPool.connect();
+    //let client : PoolClient;
+    let client:PoolClient = await connectionPool.connect();
+    console.log('Look HERE: ');
+    console.log(client);
     try {
-      let result : QueryResult;
-      result = await client.query(
+      //let result : QueryResult;
+      let result:QueryResult = await client.query(
         `SELECT users.userId, users.username, users.password,
           users.firstName, users.lastName,
           users.email, roles."role"
         FROM users INNER JOIN roles ON users."role" = roles."role"
         WHERE users.username = $1 AND users.password = $2;`, [username, password]
       );
+      console.log(`Second Look: ${result.rows}`);
+      console.log(result.rows);
       const usersMatchingUsernamePassword = result.rows.map((u) => {
         return new User(u.userid, u.username, u.password, u.firstname, u.lastname, u.email, u.role);
-      })
+      });
+      console.log(`Third Look: ${usersMatchingUsernamePassword}`);
+      console.log(usersMatchingUsernamePassword);
       if(usersMatchingUsernamePassword.length > 0) {
         return usersMatchingUsernamePassword[0];
       } else {
