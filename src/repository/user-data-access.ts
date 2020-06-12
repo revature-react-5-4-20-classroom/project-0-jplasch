@@ -27,7 +27,7 @@ export async function findUsersById(id: number): Promise<User[]> {
     client = await connectionPool.connect();
     try {
         let result : QueryResult = await client.query(
-            `SELECT users.userId, users.username, users.password, users.firstName, users.lastName, 
+            `SELECT users.userId, users.username, users."password", users.firstName, users.lastName, 
             users.email, users.role
             FROM users WHERE users.userId = $1;`, [id]
         );
@@ -50,15 +50,15 @@ export async function findUserByUsernamePassword(username: string, password: str
     //let client : PoolClient;
     let client:PoolClient = await connectionPool.connect();
     console.log('Look HERE: ');
-    console.log(client);
+    //console.log(client);
     try {
       //let result : QueryResult;
       let result:QueryResult = await client.query(
-        `SELECT users.userId, users.username, users.password,
+        `SELECT users.userId, users.username, users."password"  ,
           users.firstName, users.lastName,
           users.email, roles."role"
         FROM users INNER JOIN roles ON users."role" = roles."role"
-        WHERE users.username = $1 AND users.password = $2;`, [username, password]
+        WHERE users.username = $1 AND users."password" = $2;`, [username, password]
       );
       console.log(`Second Look: ${result.rows}`);
       console.log(result.rows);
@@ -67,6 +67,7 @@ export async function findUserByUsernamePassword(username: string, password: str
       });
       console.log(`Third Look: ${usersMatchingUsernamePassword}`);
       console.log(usersMatchingUsernamePassword);
+      console.log(usersMatchingUsernamePassword[0]);
       if(usersMatchingUsernamePassword.length > 0) {
         return usersMatchingUsernamePassword[0];
       } else {

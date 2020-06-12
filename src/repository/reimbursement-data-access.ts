@@ -32,7 +32,7 @@ export async function findReimbursementByUser(id: number): Promise<Reimbursement
     try {
         let result : QueryResult = await client.query(
             `SELECT * FROM reimbursements
-            INNER JOIN users
+            INNER JOusIN users
             ON reimbursementId = userId
             WHERE userId = $1;`, [id]
         );

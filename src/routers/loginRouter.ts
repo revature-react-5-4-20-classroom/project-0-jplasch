@@ -22,8 +22,11 @@ loginRouter.post('/', async (req: Request, res: Response) => {
       res.status(400).send('Please include username and password fields for login');
     } else {
       try {
+        console.log('first print:');
+        console.log(req.session);
         const user = await findUserByUsernamePassword(username, password);
         if(req.session) {
+          console.log(req.session.user);
           req.session.user = user;
         }
         //send the user back, as a favor to our future selves
